@@ -1,7 +1,7 @@
 { pkgs, ... }: {
 
   imports = [
-    ../../modules/raspberry_pi4.nix
+    ../../profiles/raspberry_pi4.nix
     ../../modules/kiosk.nix
   ];
 
