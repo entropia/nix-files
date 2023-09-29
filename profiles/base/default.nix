@@ -1,6 +1,6 @@
 { self, lib, ... }: {
   imports = [
-    ../../users.nix
+    ../../users
     self.nixosModules.default
   ];
 
