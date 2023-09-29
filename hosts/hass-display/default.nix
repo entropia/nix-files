@@ -11,17 +11,14 @@
     flip180 = true;
   };
 
-  system.stateVersion = "23.05";
+  networking.hostName = "hass-display";
 
   deployment.targetHost = "10.214.227.219";
 
+  system.stateVersion = "23.05";
+
   networking.useNetworkd = true;
   systemd.network.wait-online.anyInterface = true;
-
-  services.avahi = {
-    enable = true;
-    publish.enable = true;
-  };
 
   systemd.network.networks."10-lan" = {
     enable = true;
@@ -35,7 +32,10 @@
     };
   };
 
-  networking.hostName = "hass-display";
+  services.avahi = {
+    enable = true;
+    publish.enable = true;
+  };
 
   services.resolved.enable = true;
 

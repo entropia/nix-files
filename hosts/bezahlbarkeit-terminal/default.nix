@@ -10,17 +10,14 @@
     url = "http://bezahlbarkeit.club.entropia.de";
   };
 
-  system.stateVersion = "23.05";
+  networking.hostName = "bezahlbarkeit-terminal";
 
   deployment.targetHost = "10.214.227.138";
 
+  system.stateVersion = "23.05";
+
   networking.useNetworkd = true;
   systemd.network.wait-online.anyInterface = true;
-
-  services.avahi = {
-    enable = true;
-    publish.enable = true;
-  };
 
   systemd.network.networks."10-lan" = {
     enable = true;
@@ -34,7 +31,10 @@
     };
   };
 
-  networking.hostName = "bezahlbarkeit-terminal";
+  services.avahi = {
+    enable = true;
+    publish.enable = true;
+  };
 
   services.resolved.enable = true;
 
