@@ -1,7 +1,10 @@
-{ lib, ... }: {
-  imports = [ ./users.nix ];
-  config = {
+{ self, lib, ... }: {
+  imports = [
+    ../../users.nix
+    self.nixosModules.default
+  ];
 
+  config = {
     services.openssh = {
       enable = true;
     };

@@ -51,7 +51,7 @@
             };
 
             defaults.imports = [
-              ../modules/base.nix
+              ../profiles/base
             ];
           }
           (buildHosts hosts)

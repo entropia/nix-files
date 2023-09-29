@@ -15,6 +15,7 @@
 
     imports = [
       ./hosts
+      ./modules
     ];
 
     perSystem = { pkgs, ... }: {
