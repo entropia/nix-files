@@ -35,7 +35,6 @@ in
     services.udev.extraRules =
       "  ENV{ID_VENDOR_ID}==\"04e7\",ENV{ID_MODEL_ID}==\"0022\",ENV{WL_OUTPUT}=\"HDMI1\",ENV{LIBINPUT_CALIBRATION_MATRIX}=\"${if cfg.flip180 then "0 1 0 -1 0 1" else "0 -1 1 1 0 0"}\"\n"; # UDev rule for rotating the Touch Input too
 
-    fonts.enableDefaultFonts = true;
     nixpkgs.config.packageOverrides = pkgs: {
       cage = pkgs.cage.override { xwayland = null; };
       firefox = pkgs.wrapFirefox pkgs.firefox-unwrapped {
