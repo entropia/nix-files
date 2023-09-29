@@ -1,6 +1,6 @@
 {
   imports = [
-    ./raspberry_pi_common.nix
+    ./common.nix
   ];
 
   config = {

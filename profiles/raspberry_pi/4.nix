@@ -1,6 +1,6 @@
-{ pkgs, nixos-hardware, ... }: {
+{ nixos-hardware, ... }: {
   imports = [
-    ./raspberry_pi_common.nix
+    ./common.nix
     nixos-hardware.nixosModules.raspberry-pi-4
   ];
 

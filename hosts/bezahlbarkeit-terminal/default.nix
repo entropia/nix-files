@@ -1,7 +1,7 @@
 { pkgs, ... }: {
 
   imports = [
-    ../../profiles/raspberry_pi4.nix
+    ../../profiles/raspberry_pi/4.nix
   ];
 
   config = {
