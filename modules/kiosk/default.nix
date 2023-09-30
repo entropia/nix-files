@@ -32,8 +32,9 @@ in
       else
         [ "fbcon=rotate:3" ];
 
+    # UDev rule for rotating the Touch Input too
     services.udev.extraRules =
-      "  ENV{ID_VENDOR_ID}==\"04e7\",ENV{ID_MODEL_ID}==\"0022\",ENV{WL_OUTPUT}=\"HDMI1\",ENV{LIBINPUT_CALIBRATION_MATRIX}=\"${if cfg.flip180 then "0 1 0 -1 0 1" else "0 -1 1 1 0 0"}\"\n"; # UDev rule for rotating the Touch Input too
+      "ENV{ID_VENDOR_ID}==\"04e7\",ENV{ID_MODEL_ID}==\"0022\",ENV{WL_OUTPUT}=\"HDMI1\",ENV{LIBINPUT_CALIBRATION_MATRIX}=\"${if cfg.flip180 then "0 1 0 -1 0 1" else "0 -1 1 1 0 0"}\"\n";
 
     nixpkgs.config.packageOverrides = pkgs: {
       cage = pkgs.cage.override { xwayland = null; };
@@ -44,6 +45,8 @@ in
           DisablePocket = true;
           DisableTelemetry = true;
           DisableFirefoxAccounts = true;
+          DisableDeveloperTools = true;
+          OfferToSaveLogins = false;
           FirefoxHome = {
             Pocket = false;
             Snippets = false;
@@ -57,6 +60,9 @@ in
         extraPrefs = ''
           // "disable" the pinch to zoom by require a gesture that is large then the screen
           pref("browser.gesture.pinch.threshold", 5000);
+
+          // disable the "insecure password" warning when using HTTP
+          pref("security.insecure_password.ui.enabled", false);
         '';
       };
     };
