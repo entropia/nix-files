@@ -17,9 +17,5 @@
         fkms-3d.enable = true;
       };
     };
-
-    boot.kernelParams = [
-      "cma=320M"
-    ];
   };
 }
