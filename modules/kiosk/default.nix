@@ -85,11 +85,13 @@ in
     services.cage = {
       enable = true;
       user = "cage";
-      program =
-        "${lib.getExe pkgs.firefox} --kiosk ${cfg.url}";
-      extraArguments = [
-        "-d"
-      ];
+      program = "${lib.getExe pkgs.firefox} --kiosk ${cfg.url}";
+      extraArguments = [ "-d" ];
+      environment = {
+        MOZ_ENABLE_WAYLAND = "1";
+        LIBSEAT_BACKEND = "logind";
+        # WAYLAND_DEBUG = "1"; # Enable for debugging purposes
+      };
     };
 
     systemd.services."cage-tty1" = {
@@ -97,11 +99,6 @@ in
         Type = "simple";
         Restart = "on-failure";
         RestartSec = "2s";
-      };
-      environment = {
-        MOZ_ENABLE_WAYLAND = "1";
-        LIBSEAT_BACKEND = "logind";
-        # WAYLAND_DEBUG = "1"; # Enable for debugging purposes
       };
     };
 
