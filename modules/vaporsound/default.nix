@@ -5,6 +5,7 @@ in
 {
   imports = [
     ./pipewire.nix
+    ./spotifyd.nix
     ./uxplay.nix
   ];
 
@@ -24,5 +25,6 @@ in
       description = "Common target for all Vaporsound services.";
       wantedBy = [ "multi-user.target" ];
     };
+
   };
 }
