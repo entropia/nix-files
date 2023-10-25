@@ -5,6 +5,7 @@ in
 {
   imports = [
     ./pipewire.nix
+    ./uxplay.nix
   ];
 
   options.entropia.vaporsound = {
@@ -18,5 +19,10 @@ in
     boot.extraModprobeConfig = ''
       blacklist snd_bcm2835
     '';
+
+    systemd.targets.vaporsound = {
+      description = "Common target for all Vaporsound services.";
+      wantedBy = [ "multi-user.target" ];
+    };
   };
 }
