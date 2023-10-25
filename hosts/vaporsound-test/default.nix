@@ -28,69 +28,19 @@
 
     services.avahi = {
       enable = true;
-      publish.enable = true;
+      publish = {
+        enable = true;
+        userServices = true;
+      };
     };
+
+    networking.firewall.enable = false;
+    networking.firewall.allowedTCPPorts = [ 554 1024 1025 1026 ];
+    networking.firewall.allowedUDPPorts = [ 554 1024 1025 1026 ];
 
     services.resolved.enable = true;
 
-    security.rtkit.enable = true;
-    services.pipewire = {
-      enable = true;
-      pulse.enable = true;
-      alsa.enable = true;
-    };
-
-    hardware.deviceTree.enable = true;
-    hardware.deviceTree.overlays = [
-      {
-        name = "iqaudio-dacplus-overlay";
-        dtsText = ''
-          /dts-v1/;
-          /plugin/;
-
-          / {
-            compatible = "brcm,bcm2711";
-
-            fragment@0 {
-              target = <&i2s>;
-              __overlay__ {
-                status = "okay";
-              };
-            };
-
-            fragment@1 {
-              target = <&i2c1>;
-              __overlay__ {
-                #address-cells = <1>;
-                #size-cells = <0>;
-                status = "okay";
-
-                pcm5122@4c {
-                  #sound-dai-cells = <0>;
-                  compatible = "ti,pcm5122";
-                  reg = <0x4c>;
-                  AVDD-supply = <&vdd_3v3_reg>;
-                  DVDD-supply = <&vdd_3v3_reg>;
-                  CPVDD-supply = <&vdd_3v3_reg>;
-                  status = "okay";
-                };
-              };
-            };
-
-            fragment@2 {
-              target = <&sound>;
-              iqaudio_dac: __overlay__ {
-                compatible = "iqaudio,iqaudio-dac";
-                i2s-controller = <&i2s>;
-                mute-gpios = <&gpio 22 0>;
-                status = "okay";
-                iqaudio-dac,auto-mute-amp;
-              };
-            };
-          };
-        '';
-      }
-    ];
+    entropia.vaporsound.enable = true;
 
     environment.systemPackages = with pkgs; [
       pulseaudio-ctl
