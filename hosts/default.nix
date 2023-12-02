@@ -52,6 +52,7 @@
 
             defaults.imports = [
               ../profiles/base
+              { nixpkgs.overlays = [ self.overlays.default ]; }
             ];
           }
           (buildHosts hosts)

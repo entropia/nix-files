@@ -9,6 +9,11 @@
       enable = true;
     };
 
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "oops@lists.entropia.de";
+    };
+
     security.sudo.wheelNeedsPassword = false;
     nix.settings.trusted-users = [ "@wheel" ];
 

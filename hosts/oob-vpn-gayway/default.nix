@@ -1,13 +1,15 @@
-{ pkgs, ... }: {
+{
 
   imports = [
     ../../profiles/raspberry_pi/4.nix
+
+    ./wg-access-server.nix
   ];
 
   config = {
     networking.hostName = "oob-vpn-gayway";
 
-    deployment.targetHost = "10.214.227.138";
+    deployment.targetHost = "192.168.72.20";
 
     system.stateVersion = "23.05";
 
