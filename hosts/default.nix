@@ -26,14 +26,12 @@
           buildMeta = map (host:
             let
               metaFile = ./. + "${host}/meta.nix";
-              meta = import metaFile;
+              meta = import metaFile inputs;
             in
             if lib.pathIsRegularFile metaFile then
               {
                 meta = {
-                  nodeNixpkgs."${host}" = import inputs.nixpkgs {
-                    inherit (meta) system;
-                  };
+                  nodeNixpkgs."${host}" = meta.nixpkgs;
                 };
               }
             else

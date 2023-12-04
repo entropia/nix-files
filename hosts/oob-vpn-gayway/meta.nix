@@ -1,3 +1,6 @@
+{ nixpkgs, ... }:
 {
-  system = "aarch64-linux";
+  nixpkgs = import nixpkgs {
+    system = "aarch64-linux";
+  };
 }

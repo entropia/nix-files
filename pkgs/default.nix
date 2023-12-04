@@ -1,6 +1,6 @@
 {
   perSystem = { pkgs, self', ... }: {
-    overlayAttrs = self'.packages; 
+    overlayAttrs.default = self'.packages; 
     packages = {
       wg-access-server = pkgs.callPackage ./wg-access-server { };
     };
