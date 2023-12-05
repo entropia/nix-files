@@ -13,7 +13,7 @@
 
     networking.hostName = "hass-display";
 
-    deployment.targetHost = "10.214.227.219";
+    deployment.targetHost = "10.214.227.16";
 
     system.stateVersion = "23.05";
 
