@@ -15,14 +15,15 @@ buildGoModule rec {
     hash = "sha256-m7Zf8LAkVgFHBNgCr8TZTtp28LH2tFRLhdpulp//pbM=";
   };
 
-  vendorHash = "sha256-DWnLXQaGUt1hsbNHBR+ZpYTgvBMBTEZy3yQB3fWgnp4=";
+  proxyVendor = true; # darwin/linux hash mismatch
+  vendorHash = "sha256-aEJu3dTKyu2d/xI03DEeOqNl0nkAPkURF/AK7mOf5A4=";
 
   CGO_ENABLED = 1;
 
   ldflags = [ "-s" "-w" ];
-  
+
   doCheck = false;
-    
+
   ui = buildNpmPackage {
     inherit version src;
     pname = "wg-access-server-ui";
@@ -39,7 +40,7 @@ buildGoModule rec {
     '';
   };
 
-  preBuild = ''
+  postInstall = ''
     mkdir -p $out/
     cp -r ${ui}/site/ $out/
   '';
