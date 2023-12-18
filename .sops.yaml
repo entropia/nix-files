@@ -1,0 +1,15 @@
+keys: 
+  - &admin_xanderio_age age1e9yparaev0gxwmherrjpxmfzgqga5eqdw53lrnv05s3ppjgzyceqftnwpx
+  - &admin_evlli_pgp 56B96D1C10D68F49E31BB8A18092413A3F6DD75F
+  - &admin_jcgruenhage_pgp 09E8418B46B53B0F825DE4BE018ACF465280F466
+  - &admin_transcaffeine_pgp 5E0A9CB3980657CB9AB94AE6790EAEC8F99AB41F
+
+creation_rules:
+  - path_regex: secrets/all/[^/]+\.yaml$
+    key_groups:
+      - age:
+          - *admin_xanderio_age
+        pgp:
+          - *admin_evlli_pgp
+          - *admin_jcgruenhage_pgp
+          - *admin_transcaffeine_pgp

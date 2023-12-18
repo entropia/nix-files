@@ -50,6 +50,7 @@
 
             defaults.imports = [
               ../profiles/base
+              inputs.sops-nix.nixosModules.sops
               { nixpkgs.overlays = [ self.overlays.default ]; }
             ];
           }

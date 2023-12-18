@@ -6,6 +6,8 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     colmena.url = "github:zhaofengli/colmena";
     colmena.inputs."nixpkgs".follows = "nixpkgs";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs."nixpkgs".follows = "nixpkgs";
   };
 
   outputs = inputs@{ flake-parts, ... }: flake-parts.lib.mkFlake { inherit inputs; } {
@@ -17,10 +19,16 @@
       ./pkgs
     ];
 
-    perSystem = { pkgs, ... }: {
+    perSystem = { pkgs, inputs', ... }: {
       devShells.default = pkgs.mkShellNoCC {
+        sopsPGPKeyDirs = [
+          "${toString ./.}/secrets/keys"
+        ];
+        sopsCreateGPGHome = "1";
         packages = with pkgs; [
           colmena
+          sops
+          inputs'.sops-nix.packages.sops-import-keys-hook
         ];
       };
     };
