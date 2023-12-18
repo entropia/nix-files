@@ -1,10 +1,15 @@
-{ config, ... }: {
+{ pkgs, config, ... }: {
   config = {
+    x.sops.secrets = {
+      "services/wg-access-server/privateKey".owner = "root";
+      "services/wg-access-server/oidcClientSecret".owner = "root";
+    };
+    
     services.wg-access-server = {
       enable = true;
-      adminPasswordFile = "/var/keys/admin-password";
-      wireguardPrivateKey = "/var/keys/private-key";
-      oidcClientSecretFile = "/var/keys/oidcClientSecret";
+      adminPasswordFile = (pkgs.writeText "empty-file" "");
+      wireguardPrivateKey = config.sops.secrets."services/wg-access-server/privateKey".path;
+      oidcClientSecretFile = config.sops.secrets."services/wg-access-server/oidcClientSecret".path;
 
       settings = {
         wireguard.mtu = 1280;
