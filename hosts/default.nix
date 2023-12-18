@@ -25,7 +25,7 @@
 
           buildMeta = map (host:
             let
-              metaFile = ./. + "${host}/meta.nix";
+              metaFile = ./. + "/${host}/meta.nix";
               meta = import metaFile inputs;
             in
             if lib.pathIsRegularFile metaFile then
