@@ -35,7 +35,7 @@
     };
 
     networking.firewall.enable = false;
-    networking.firewall.allowedTCPPorts = [ 554 1024 1025 1026 ];
+    networking.firewall.allowedTCPPorts = [ 554 5353 1024 1025 1026 ];
     networking.firewall.allowedUDPPorts = [ 554 1024 1025 1026 ];
 
     services.resolved.enable = true;
@@ -45,6 +45,14 @@
     environment.systemPackages = with pkgs; [
       pulseaudio-ctl
       alsa-utils
+      ((pkgs.shairport-sync.override {
+        enableMetadata = true;        
+        enableAirplay2 = true;
+      }).overrideAttrs (old: {
+        configureFlags = old.configureFlags ++ ["--with-mqtt-client"]; 
+        buildInputs = old.buildInputs ++ [ pkgs.mosquitto.lib pkgs.mosquitto.dev ];
+      }))
+      nqptp
     ];
   };
 }

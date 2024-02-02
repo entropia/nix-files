@@ -5,8 +5,7 @@ in
 {
   imports = [
     ./pipewire.nix
-    ./spotifyd.nix
-    ./uxplay.nix
+    ./shairport.nix
   ];
 
   options.entropia.vaporsound = {
