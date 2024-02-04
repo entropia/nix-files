@@ -24,7 +24,7 @@ in
     };
 
     systemd.services.nqptp = {
-      wantedBy = [ "vaporsound.target" ];
+      wantedBy = [ "aerosound.target" ];
       serviceConfig = {
         ExecStart = "${pkgs.nqptp}/bin/nqptp";
         Restart = "always";
@@ -33,7 +33,7 @@ in
     };
 
     systemd.services.shairport-sync = {
-      wantedBy = [ "vaporsound.target" ];
+      wantedBy = [ "aerosound.target" ];
       after = [ "network-online.target" "avahi-daemon.service" "nqptp.service" "sound.target" ];
       serviceConfig =
         let

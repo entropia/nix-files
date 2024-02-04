@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  cfg = config.entropia.vaporsound;
+  cfg = config.entropia.aerosound;
 in
 {
   imports = [
@@ -8,8 +8,8 @@ in
     ./shairport.nix
   ];
 
-  options.entropia.vaporsound = {
-    enable = lib.mkEnableOption "vaporsound";
+  options.entropia.aerosound = {
+    enable = lib.mkEnableOption "aerosound";
   };
 
   config = lib.mkIf cfg.enable {
@@ -20,10 +20,9 @@ in
       blacklist snd_bcm2835
     '';
 
-    systemd.targets.vaporsound = {
-      description = "Common target for all Vaporsound services.";
+    systemd.targets.aerosound = {
+      description = "Common target for all Aerosound services.";
       wantedBy = [ "multi-user.target" ];
     };
-
   };
 }
