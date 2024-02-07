@@ -8,6 +8,7 @@
     packages = {
       berechenbarkeit = pkgs.callPackage ./berechenbarkeit { };
       wg-access-server = pkgs.callPackage ./wg-access-server { };
+      mqtt-publisher = pkgs.callPackage ./mqtt-publisher { };
     };
   };
 }

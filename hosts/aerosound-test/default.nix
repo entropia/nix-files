@@ -5,7 +5,7 @@
   ];
 
   config = {
-    networking.hostName = "vaporsound-test";
+    networking.hostName = "aerosound-test";
 
     deployment.targetHost = "10.214.227.9";
 
@@ -34,25 +34,18 @@
       };
     };
 
-    networking.firewall.enable = false;
-    networking.firewall.allowedTCPPorts = [ 554 5353 1024 1025 1026 ];
-    networking.firewall.allowedUDPPorts = [ 554 1024 1025 1026 ];
+    networking.firewall.enable = true;
 
     services.resolved.enable = true;
 
-    entropia.vaporsound.enable = true;
+    services.aerosound = {
+      enable = true;
+      mqtt.hostname = "mqtt.club.entropia.de";
+    };
 
     environment.systemPackages = with pkgs; [
       pulseaudio-ctl
       alsa-utils
-      ((pkgs.shairport-sync.override {
-        enableMetadata = true;        
-        enableAirplay2 = true;
-      }).overrideAttrs (old: {
-        configureFlags = old.configureFlags ++ ["--with-mqtt-client"]; 
-        buildInputs = old.buildInputs ++ [ pkgs.mosquitto.lib pkgs.mosquitto.dev ];
-      }))
-      nqptp
     ];
   };
 }

@@ -1,14 +1,15 @@
 { config, lib, ... }:
 let
-  cfg = config.entropia.aerosound;
+  cfg = config.services.aerosound;
 in
 {
   imports = [
     ./pipewire.nix
     ./shairport.nix
+    ./mqtt.nix
   ];
 
-  options.entropia.aerosound = {
+  options.services.aerosound = {
     enable = lib.mkEnableOption "aerosound";
   };
 
