@@ -5,7 +5,7 @@
   ];
 
   config = {
-    networking.hostName = "aerosound-test";
+    networking.hostName = "aerosound-kueche";
 
     deployment.targetHost = "10.214.227.9";
 
