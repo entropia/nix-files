@@ -1,15 +1,12 @@
 { pkgs, config, ... }: {
   config = {
     x.sops.secrets = {
-      "services/wg-access-server/privateKey".owner = "root";
-      "services/wg-access-server/oidcClientSecret".owner = "root";
+      "services/wg-access-server/secrets" = {};
     };
     
     services.wg-access-server = {
       enable = true;
-      adminPasswordFile = (pkgs.writeText "empty-file" "");
-      wireguardPrivateKey = config.sops.secrets."services/wg-access-server/privateKey".path;
-      oidcClientSecretFile = config.sops.secrets."services/wg-access-server/oidcClientSecret".path;
+      secretsFile = config.sops.secrets."services/wg-access-server/secrets".path;
 
       settings = {
         wireguard.mtu = 1280;
@@ -51,7 +48,6 @@
         };
       };
     };
-
 
     networking.firewall = {
       allowedTCPPorts = [ 80 443 ];

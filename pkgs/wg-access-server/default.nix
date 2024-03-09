@@ -2,37 +2,39 @@
 , buildGoModule
 , buildNpmPackage
 , fetchFromGitHub
+, makeWrapper
+, iptables
 }:
 
 buildGoModule rec {
   pname = "wg-access-server";
-  version = "0.10.1";
+  version = "0.11.0";
 
   src = fetchFromGitHub {
     owner = "freifunkMUC";
     repo = "wg-access-server";
     rev = "v${version}";
-    hash = "sha256-m7Zf8LAkVgFHBNgCr8TZTtp28LH2tFRLhdpulp//pbM=";
+    hash = "sha256-1X45XxdaeNETH3pwCzaOMQJL9CG4Ej/kXIUiVavm56A=";
   };
 
   proxyVendor = true; # darwin/linux hash mismatch
-  vendorHash = "sha256-aEJu3dTKyu2d/xI03DEeOqNl0nkAPkURF/AK7mOf5A4=";
+  vendorHash = "sha256-ev2hvlugpHsCz6a1NQ7UXCgl8Mtq34G5+bBwpsEg1Ls=";
 
   CGO_ENABLED = 1;
 
   ldflags = [ "-s" "-w" ];
 
-  doCheck = false;
+  nativeBuildInputs = [ makeWrapper ];
+
+  checkFlags = [ "-skip=TestDNSProxy_ServeDNS" ];
 
   ui = buildNpmPackage {
     inherit version src;
     pname = "wg-access-server-ui";
 
-    npmDepsHash = "sha256-NDjADRnJHOA2gbj7Ah5BQkFZPbqx2vZjarQeO4LBITI=";
+    npmDepsHash = "sha256-JMjojMxxNuay2/uQNuNgbZTQKMCyg6lWjfSfIYVeVzU=";
 
-    prePatch = ''
-      cd website/
-    '';
+    sourceRoot = "${src.name}/website";
 
     installPhase = ''
       mkdir -p $out
@@ -40,10 +42,21 @@ buildGoModule rec {
     '';
   };
 
+  preBuild = ''
+    VERSION=v${version} go generate buildinfo/buildinfo.go
+  '';
+
   postInstall = ''
     mkdir -p $out/
+    # include frontend so that the nixos module can use it.
     cp -r ${ui}/site/ $out/
+    wrapProgram  $out/bin/wg-access-server \
+      --prefix PATH : ${lib.makeBinPath [ iptables ]}
   '';
+
+  passthru = {
+    updateScript = ./update.sh;
+  };
 
 
   meta = with lib; {
