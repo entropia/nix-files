@@ -1,7 +1,7 @@
-{ self, lib, ... }: {
+{ inputs, lib, ... }: {
   imports = [
     ../../users
-    self.nixosModules.default
+    inputs.self.nixosModules.default
   ];
 
   config = {

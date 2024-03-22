@@ -1,7 +1,7 @@
-{ nixos-hardware, ... }: {
+{ inputs, ... }: {
   imports = [
     ./common.nix
-    nixos-hardware.nixosModules.raspberry-pi-4
+    inputs.nixos-hardware.nixosModules.raspberry-pi-4
   ];
 
   config = {

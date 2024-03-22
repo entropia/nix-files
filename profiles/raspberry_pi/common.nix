@@ -1,6 +1,6 @@
-{ pkgs, nixpkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports = [
-    (nixpkgs + "/nixos/modules/installer/sd-card/sd-image-aarch64.nix")
+    (inputs.nixpkgs + "/nixos/modules/installer/sd-card/sd-image-aarch64.nix")
   ];
 
   config = {
