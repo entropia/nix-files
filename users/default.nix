@@ -1,19 +1,22 @@
-{ lib, ... }:
+{ lib, config, ... }:
 let
-  inherit (lib)
-    filterAttrs
-    attrNames
-    ;
-
-  isDir = _name: type: type == "directory";
-
-  userFolders = attrNames
-    (filterAttrs isDir
-      (builtins.readDir ./.)
-    );
-
-  buildUser = name: (./. + "/${name}");
+  cfg = config.entropia;
 in
 {
-  imports = map buildUser userFolders;
+  options.entropia = {
+    users = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = ''
+        list of users that get added to a host, in addition to the global admins
+      '';
+    };
+  };
+
+  config = {
+    # Add our global admins
+    entropia.users = [ "herrbett" "jcgruenhage" "xanderio" ];
+
+    users.users = (lib.genAttrs (lib.unique cfg.users) (name: import ./${name}));
+  };
 }

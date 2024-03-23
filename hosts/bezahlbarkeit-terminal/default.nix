@@ -5,6 +5,7 @@
   ];
 
   config = {
+    entropia.users = [ "evlli" ];
     entropia.kiosk = {
       enable = true;
       url = "http://bezahlbarkeit.club.entropia.de";

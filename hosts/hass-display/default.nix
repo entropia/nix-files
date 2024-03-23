@@ -5,6 +5,7 @@
   ];
 
   config = {
+    entropia.users = [ "evlli" ];
     entropia.kiosk = {
       enable = true;
       url = "https://hass.club.entropia.de?BrowserID=hass-display";
