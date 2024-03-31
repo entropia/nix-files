@@ -15,7 +15,15 @@ in
 
   config = {
     # Add our global admins
-    entropia.users = [ "herrbett" "jcgruenhage" "xanderio" ];
+    entropia.users = [ 
+      "herrbett" 
+      "jcgruenhage"  
+      "promasu"
+      "stored"
+      "transcaffeine"
+      "twi"
+      "xanderio"
+    ];
 
     users.users = (lib.genAttrs (lib.unique cfg.users) (name: import ./${name}));
   };
