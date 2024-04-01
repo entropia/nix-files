@@ -1,5 +1,11 @@
 {
   description = "Entropia nix files";
+
+  nixConfig = {
+    extra-substituters = [ "https://entropia.cachix.org" ];
+    extra-trusted-public-keys = [ "entropia.cachix.org-1:a3vy2scFVr0sQvtp2CPlOlzUKmPfbvs1/9VFsqqI5Sk=" ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
