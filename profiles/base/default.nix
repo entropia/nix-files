@@ -1,6 +1,7 @@
 { inputs, lib, ... }: {
   imports = [
     ../../users
+    ./nginx.nix
     inputs.self.nixosModules.default
   ];
 
