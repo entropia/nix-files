@@ -26,6 +26,8 @@
       ./modules
       ./pkgs
       ./checks
+      ./lib/cloud-init.nix
+      ./flakeModules
     ];
 
     perSystem = { pkgs, inputs', ... }: {
