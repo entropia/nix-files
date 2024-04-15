@@ -6,6 +6,6 @@ let
 in
 {
   perSystem = { system, ... }: {
-    checks = builtins.mapAttrs (_: nixos: nixos.config.system.build.toplevel) (filterSystem system self.nixosConfigurations);
+    checks = lib.mapAttrs' (name: nixos: lib.nameValuePair "nixosConfigurations-${name}" nixos.config.system.build.toplevel) (filterSystem system self.nixosConfigurations);
   };
 }
