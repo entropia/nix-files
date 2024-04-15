@@ -24,6 +24,7 @@ jobs:
         name: entropia
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
         extraPullNames: nix-community
+        useDaemon: false
     - run: nix run github:Mic92/nix-fast-build -- --skip-cached --no-nom --flake .#checks.${{ matrix.system }}
 
   macos:
@@ -43,4 +44,5 @@ jobs:
         name: entropia
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
         extraPullNames: nix-community
+        useDaemon: false
     - run: nix run github:Mic92/nix-fast-build -- --skip-cached --no-nom --flake .#checks.${{ matrix.os == 'macos-14' && 'aarch64-darwin' || 'x86_64-darwin' }}
