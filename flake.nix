@@ -25,6 +25,7 @@
       ./hosts
       ./modules
       ./pkgs
+      ./checks
     ];
 
     perSystem = { pkgs, inputs', ... }: {
