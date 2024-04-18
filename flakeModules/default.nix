@@ -1,0 +1,5 @@
+{
+  imports = [
+    ./cloud-init.nix
+  ];
+}
