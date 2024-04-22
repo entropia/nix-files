@@ -2,8 +2,8 @@
 
   imports = [
     ./disko.nix
-    ./hardware-configuration.nix
     inputs.disko.nixosModules.disko
+    ../../profiles/entropia-cluster-vm
   ];
 
   entropia.users = [ "leona" ];
