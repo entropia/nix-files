@@ -4,6 +4,7 @@
     ./disko.nix
     inputs.disko.nixosModules.disko
     ../../profiles/entropia-cluster-vm
+    ./berechenbarkeit.nix
   ];
 
   entropia.users = [ "leona" ];
@@ -28,7 +29,7 @@
     ];
     routes = [
       { routeConfig = { Destination = "0.0.0.0/0"; Gateway = "45.140.180.33"; }; }
-      { routeConfig = { Destination = "::/0"; Gateway = "2a0e:c5c0:0:201::"; }; }
+      { routeConfig = { Destination = "::/0"; Gateway = "2a0e:c5c0:0:201::1"; }; }
     ];
   };
   services.resolved.enable = true;
