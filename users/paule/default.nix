@@ -1,0 +1,7 @@
+{
+  isNormalUser = true;
+  extraGroups = [ "wheel" ];
+  openssh.authorizedKeys.keys = [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCu966uNfVnXHpaeHH9FeDjorqVfIfqeoFJBdfs8afaaRdIEKGEm4l9VtHb3pLGMH18sZ5Osn3ttazmmtjirvTyZrhq685qqUpFAPJXtUVSamn1zi3BqN0GmdNOZ+b96iPOIxoycQx+H4vxlMuRiTpjHaH3utC0cOW1iBdwq2F3E8p59Q4JJrji7oZ4HKWKTS5Ozs6iPZ0+BmAW9ACEUhuFHKm1G0rEBKa+VoSq9fRZ9UZvurZt9nuH0Nr5LBC1ftr7zQdtKmm0UJ98XwRiL2JCVWiUa2JQoZszA898GxPwR/4oAyHcDgVQVP2BJqd4jQ6dNbPpiZ9Kk4ygBOBIRMtackkLEgB/Wpl7I0lT9Iybw5oKLlXApYsqNsvkfQqCHRMcIlsshwUJ2R4hRI7sF5nYos9E+hlq7eXRvb5e3RXxesbCCTeMmWooUuACfmMssaXPAUf4mrxO7rTsyA7wFcKmicAMIBzOaeocNseV5sY2mopw20TlEUoSkPvklzwP7c8= paul"
+  ];
+}
