@@ -46,6 +46,10 @@
         default_session = initial_session;
       };
     };
+    users.users.guest = {
+      isNormalUser = true;
+      password = "guest";
+    };
 
     nix.settings.experimental-features = "nix-command flakes";
 
