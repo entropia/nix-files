@@ -10,10 +10,12 @@
     hardware.raspberry-pi."4" = {
       poe-plus-hat.enable = true;
     };
+    
+    services.gulaschdisplay.enable = true;
 
     boot = {
       kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
-      # initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+      initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
       loader = {
         grub.enable = false;
         generic-extlinux-compatible.enable = true;
@@ -29,36 +31,21 @@
       killall
       htop
       git
+      gulaschdisplay-client
     ];
-
-    environment.variables = {
-      NIXOS_OZONE_WL = "1";
-    };
-
-    programs.sway.enable = true;
-    services.greetd = {
-      enable = true;
-      settings = rec {
-        initial_session = {
-          command = "sway";
-          user = "guest";
-        };
-        default_session = initial_session;
-      };
-    };
-    users.users.guest = {
-      isNormalUser = true;
-      password = "guest";
-    };
 
     nix.settings.experimental-features = "nix-command flakes";
 
     networking.hostName = "gulaschdisplay1";
 
-    deployment.targetHost = "10.214.227.106";
+    deployment.targetHost = "10.214.227.146";
 
     networking.useNetworkd = true;
     systemd.network.wait-online.anyInterface = true;
+
+    nixpkgs.config = {
+      allowUnfree = true;
+    };
 
     systemd.network.networks."10-lan" = {
       enable = true;
