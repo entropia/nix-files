@@ -31,6 +31,31 @@ in
       extraGroups = [ "wheel" ];
     };
 
+    services.tailscale.enable = true;
+    environment.systemPackages = [ pkgs.tailscale ];
+
+    systemd.services.tailscale-autoconnect = {
+        description = "Automatic connection to Tailscale";
+
+        after = [ "network-pre.target" "tailscale.service" ];
+        wants = [ "network-pre.target" "tailscale.service" ];
+        wantedBy = [ "multi-user.target" ];
+
+        serviceConfig.Type = "oneshot";
+        serviceConfig.User = "root";
+
+        script = with pkgs; ''
+          sleep 2
+
+          status="$(${tailscale}/bin/tailscale status -json | ${jq}/bin/jq -r .BackendState)"
+          if [ $status = "Running" ]; then # if so, then do nothing
+            exit 0
+          fi
+
+          ${tailscale}/bin/tailscale up -authkey tskey-auth-XXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        '';
+      };
+
     systemd.services."gulaschdisplay-client" = {
       after = [ "greetd.service" ];
       partOf = [ "greetd.service" ];
