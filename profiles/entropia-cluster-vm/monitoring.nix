@@ -18,7 +18,7 @@
       global = {
         external_labels = {
           environment = "prod";
-          instance = "${config.networking.hostName}.entropia.de";
+          instance = config.networking.fqdn;
         };
         scrape_interval = "1m";
         scrape_timeout = "10s";
