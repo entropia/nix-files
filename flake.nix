@@ -16,6 +16,8 @@
     sops-nix.inputs."nixpkgs".follows = "nixpkgs";
     disko.url = "github:nix-community/disko";
     disko.inputs."nixpkgs".follows = "nixpkgs";
+    nix-fast-build.url = "github:Mic92/nix-fast-build";
+    nix-fast-build.inputs."nixpkgs".follows = "nixpkgs";
   };
 
   outputs = inputs@{ flake-parts, ... }: flake-parts.lib.mkFlake { inherit inputs; } {
@@ -31,6 +33,9 @@
     ];
 
     perSystem = { pkgs, inputs', ... }: {
+      packages = {
+        inherit (inputs'.nix-fast-build.packages) nix-fast-build;
+      };
       devShells.default = pkgs.mkShellNoCC {
         sopsPGPKeyDirs = [
           "${toString ./.}/secrets/keys"

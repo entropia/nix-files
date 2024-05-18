@@ -27,26 +27,27 @@ jobs:
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
         extraPullNames: nix-community
         useDaemon: false
-    - run: nix run github:Mic92/nix-fast-build -- --skip-cached --no-nom --flake .#checks.${{ matrix.system }}
+    - run: nix run .#nix-fast-build -- --skip-cached --no-nom --flake .#checks.${{ matrix.system }}
 
-  macos:
-    strategy:
-      matrix:
-        os: [ "macos-13", "macos-14" ]
-    runs-on: ${{ matrix.os }}
-    steps:
-    - uses: actions/checkout@v4
-    - uses: DeterminateSystems/nix-installer-action@main
-      with:
-        extra-conf: |
-          accept-flake-config = true
-    - uses: DeterminateSystems/magic-nix-cache-action@main
-      with: 
-        use-flakehub: false
-    - uses: cachix/cachix-action@v14
-      with:
-        name: entropia
-        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-        extraPullNames: nix-community
-        useDaemon: false
-    - run: nix run github:Mic92/nix-fast-build -- --skip-cached --no-nom --flake .#checks.${{ matrix.os == 'macos-14' && 'aarch64-darwin' || 'x86_64-darwin' }}
+  # disabled for now, as nix-fast-build failes on macos 
+  # macos:
+  #   strategy:
+  #     matrix:
+  #       os: [ "macos-13", "macos-14" ]
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #   - uses: DeterminateSystems/nix-installer-action@main
+  #     with:
+  #       extra-conf: |
+  #         accept-flake-config = true
+  #   - uses: DeterminateSystems/magic-nix-cache-action@main
+  #     with: 
+  #       use-flakehub: false
+  #   - uses: cachix/cachix-action@v14
+  #     with:
+  #       name: entropia
+  #       authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+  #       extraPullNames: nix-community
+  #       useDaemon: false
+  #   - run: nix run .#nix-fast-build -- --skip-cached --no-nom --flake .#checks.${{ matrix.os == 'macos-14' && 'aarch64-darwin' || 'x86_64-darwin' }}
