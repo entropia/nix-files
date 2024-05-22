@@ -6,6 +6,7 @@ keys:
   - &admin_leona_pgp EB5CEED62922C6050F9FC85BD5B08ADFC75E3605
   - &host_oob_gayway_age age14ud0wf5nt2y4vh2kddasnqtdyrhl5xcrmh8py60tw9z5cw8xy9wqqyxsp6
   - &host_abrechnung_age age1tcvenngz4qfgyqpxcrf9xgdygs730h83d4ln6xz99slhnaeek5fsh9xgrx
+  - &host_recipes_age age1zngzchzzy46gyn99awcw2fgn97wuv35afyqrat9442sakgv0ugls606zlr
 
 creation_rules:
   - path_regex: secrets/all/[^/]+\.yaml$
@@ -23,6 +24,7 @@ creation_rules:
       - age:
           - *admin_xanderio_age
           - *host_abrechnung_age
+          - *host_recipes_age
         pgp:
           - *admin_evlli_pgp
           - *admin_jcgruenhage_pgp
@@ -40,6 +42,15 @@ creation_rules:
           - *admin_jcgruenhage_pgp
           - *admin_transcaffeine_pgp
           - *admin_leona_pgp
+
+  - path_regex: secrets/hosts/recipes.yaml
+    key_groups:
+      - age:
+          - *admin_xanderio_age
+          - *host_recipes_age
+        pgp:
+          - *admin_jcgruenhage_pgp
+          - *admin_transcaffeine_pgp
 
   - path_regex: secrets/hosts/oob_gayway.yaml
     key_groups:
