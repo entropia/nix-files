@@ -2,16 +2,16 @@
 
 rustPlatform.buildRustPackage {
   pname = "berechenbarkeit";
-  version = "0-unstable-2024-05-16";
+  version = "0-unstable-2024-05-22";
 
   src = fetchFromGitHub {
     owner = "entropia";
     repo = "berechenbarkeit";
-    rev = "b482c7398fb68f946e4056bb5c4c183d0dcabce7";
-    hash = "sha256-atFIHF0NQqQG+VLdf8ox1vpg8/8RI6ii8UH7M9Rfwg0=";
+    rev = "e642b3b06150ba61f516f75085beee97fc57ddb5";
+    hash = "sha256-kRT5vOgh8GchaIAal7ECnOAg7kaT1maQ/iueABpbiQg=";
   };
 
-  cargoHash = "sha256-Z+APSmwFfqQAbo4cUDtdRQhLs0IuwvyX5jUaIOgcScA=";
+  cargoHash = "sha256-jIL614Rafp65E0FyFKBl7eXXfO72mVj+8rp5BU8aezw=";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [
@@ -19,9 +19,7 @@ rustPlatform.buildRustPackage {
     postgresql.lib
   ];
 
-  preBuild = ''
-    export BERECHENBARKEIT_STATIC_BASE_PATH=$assets
-  '';
+  BERECHENBARKEIT_STATIC_BASE_PATH = placeholder "assets";
 
   postInstall = ''
     mkdir $assets
