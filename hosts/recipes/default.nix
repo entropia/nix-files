@@ -4,6 +4,7 @@
     ./disko.nix
     inputs.disko.nixosModules.disko
     ../../profiles/entropia-cluster-vm
+    ./tandoor.nix
   ];
 
   networking.hostName = "recipes";

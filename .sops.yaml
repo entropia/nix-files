@@ -71,3 +71,12 @@ creation_rules:
           - *admin_evlli_pgp
           - *admin_jcgruenhage_pgp
           - *admin_transcaffeine_pgp
+
+  - path_regex: secrets/services/tandoor.yaml
+    key_groups:
+      - age:
+          - *admin_xanderio_age
+          - *host_recipes_age
+        pgp:
+          - *admin_jcgruenhage_pgp
+          - *admin_transcaffeine_pgp
