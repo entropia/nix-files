@@ -10,39 +10,29 @@
     {
       colmena =
         let
-          isDir = _name: type: type == "directory";
+          inventory = builtins.fromJSON
+            (builtins.readFile ./inventory.json)
+          ;
 
-          hosts = builtins.attrNames
-            (lib.filterAttrs isDir
-              (builtins.readDir ./.)
-            );
 
-          buildHosts = hosts: lib.genAttrs hosts (name: {
-            imports = [
-              (./. + "/${name}")
-            ];
-          });
+          hosts = lib.listToAttrs (map
+            (host: {
+              name = host.hostName;
+              value = {
+                imports = [ (./. + "/gulaschdisplay") ];
+                networking.hostName = host.hostName;
+                deployment.targetHost = host.targetHost;
+              };
+            }
+            )
+            inventory);
 
-          buildMeta = map (host:
-            let
-              metaFile = ./. + "/${host}/meta.nix";
-              meta = import metaFile inputs;
-            in
-            if lib.pathIsRegularFile metaFile then
-              {
-                meta = {
-                  nodeNixpkgs."${host}" = meta.nixpkgs;
-                };
-              }
-            else
-              { }
-          );
         in
-        (lib.foldl (lib.recursiveUpdate) { } ([
+        (lib.foldl (lib.recursiveUpdate) { } [
           {
             meta = {
               nixpkgs = import inputs.nixpkgs {
-                system = "x86_64-linux";
+                system = "aarch64-linux";
               };
 
               specialArgs = {
@@ -56,9 +46,8 @@
               { nixpkgs.overlays = [ self.overlays.default ]; }
             ];
           }
-          (buildHosts hosts)
-        ] ++
-        (buildMeta hosts))
+          hosts
+        ]
         );
 
       nixosConfigurations = nodes;

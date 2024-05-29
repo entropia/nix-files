@@ -78,6 +78,9 @@ in
         Restart = "always";
         RestartSec = "2s";
         User = "guest";
+        Environment = [
+          "WLR_LIBINPUT_NO_DEVICES = 1"
+        ];
       };
 
     };
