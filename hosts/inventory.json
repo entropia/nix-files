@@ -1,6 +1,26 @@
 [
   {
     "hostName": "gulaschdisplay1",
-    "targetHost": "10.214.227.146"
+    "targetHost": "gulaschdisplay1"
+  },
+  {
+    "hostName": "gulaschdisplay2",
+    "targetHost": "gulaschdisplay2"
+  },
+  {
+    "hostName": "gulaschdisplay3",
+    "targetHost": "gulaschdisplay3"
+  },
+  {
+    "hostName": "gulaschdisplay4",
+    "targetHost": "gulaschdisplay4"
+  },
+  {
+    "hostName": "gulaschdisplay5",
+    "targetHost": "gulaschdisplay5"
+  },
+  {
+    "hostName": "gulaschdisplay6",
+    "targetHost": "gulaschdisplay6"
   }
 ]

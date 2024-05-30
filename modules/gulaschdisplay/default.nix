@@ -52,9 +52,13 @@ in
             exit 0
           fi
 
-          ${tailscale}/bin/tailscale up -authkey tskey-auth-XXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+          ${tailscale}/bin/tailscale up --auth-key tskey-auth-XXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
         '';
       };
+
+    environment.variables = {
+        "WLR_LIBINPUT_NO_DEVICES"=1;
+    };
 
     systemd.services."gulaschdisplay-client" = {
       after = [ "greetd.service" ];
@@ -78,9 +82,6 @@ in
         Restart = "always";
         RestartSec = "2s";
         User = "guest";
-        Environment = [
-          "WLR_LIBINPUT_NO_DEVICES = 1"
-        ];
       };
 
     };
