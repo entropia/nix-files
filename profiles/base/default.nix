@@ -1,4 +1,4 @@
-{ inputs, lib, ... }: {
+{ inputs, lib, pkgs, ... }: {
   imports = [
     ../../users
     ./nginx.nix
@@ -27,7 +27,24 @@
       trusted-substituters = [ "https://entropia.cachix.org" ];
       substituters = [ "https://entropia.cachix.org" ];
       trusted-public-keys = [ "entropia.cachix.org-1:a3vy2scFVr0sQvtp2CPlOlzUKmPfbvs1/9VFsqqI5Sk=" ];
+      experimental-features = [ "nix-command" "flakes" ];
     };
+
+    programs.htop.enable = true;
+    programs.mtr.enable = true;
+    programs.neovim = {
+      enable = true;
+      defaultEditor = true;
+      vimAlias = true;
+      viAlias = true;
+      withRuby = false;
+      withPython3 = false;
+    };
+
+    environment.systemPackages = with pkgs; [
+      bind.dnsutils # for dig
+      tcpdump
+    ];
 
     # connect to node using local user name
     deployment.targetUser = lib.mkDefault null;
