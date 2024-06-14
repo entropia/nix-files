@@ -1,17 +1,17 @@
-{ lib, rustPlatform, fetchFromGitHub, pkg-config, openssl, postgresql }:
+{ rustPlatform, fetchFromGitHub, pkg-config, openssl, postgresql }:
 
 rustPlatform.buildRustPackage {
   pname = "berechenbarkeit";
-  version = "0-unstable-2024-05-22";
+  version = "0-unstable-2024-06-14";
 
   src = fetchFromGitHub {
     owner = "entropia";
     repo = "berechenbarkeit";
-    rev = "e642b3b06150ba61f516f75085beee97fc57ddb5";
-    hash = "sha256-kRT5vOgh8GchaIAal7ECnOAg7kaT1maQ/iueABpbiQg=";
+    rev = "73768f7690f0c91daed1560e3f8734d66218fba8";
+    hash = "sha256-mDx1sEEFoL90TUyIlpbIL+3WBaIggOrIQl+++YZQ7yI=";
   };
 
-  cargoHash = "sha256-jIL614Rafp65E0FyFKBl7eXXfO72mVj+8rp5BU8aezw=";
+  cargoHash = "sha256-ErfSeACBCw7t42joTljGxk201UrGxF6YO6Hpvj2vS0o=";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [
