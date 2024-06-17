@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, lib, inputs, ... }: {
   imports = [
     (inputs.nixpkgs + "/nixos/modules/installer/sd-card/sd-image-aarch64.nix")
   ];
@@ -6,6 +6,9 @@
   config = {
     nixpkgs.hostPlatform.system = "aarch64-linux";
     hardware.enableRedistributableFirmware = true;
+    boot.supportedFilesystems = {
+      zfs = lib.mkForce false;
+    };
 
     hardware.opengl = {
       enable = true;
