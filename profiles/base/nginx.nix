@@ -10,8 +10,6 @@
       recommendedOptimisation = lib.mkDefault true;
       recommendedProxySettings = lib.mkDefault true;
       recommendedTlsSettings = lib.mkDefault true;
-      recommendedZstdSettings = lib.mkDefault true;
-      recommendedBrotliSettings = lib.mkDefault true;
 
       # create a access log file every vhost
       commonHttpConfig = ''
