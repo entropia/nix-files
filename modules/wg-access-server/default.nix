@@ -15,8 +15,24 @@ in
     package = mkPackageOption pkgs "wg-access-server" { };
 
     settings = mkOption {
-      type = settingsFormat.type;
-      default = { };
+      type = lib.types.submodule {
+        freeformType = settingsFormat.type;
+        options = {
+          dns.enable = mkOption {
+            type = types.bool;
+            default = true;
+            description = ''
+              Enable/disable the embedded DNS proxy server.
+              This is enabled by default and allows VPN clients to avoid DNS leaks by sending all DNS requests to wg-access-server itself.
+            '';
+          };
+          storage = mkOption {
+            type = types.str;
+            default = "sqlite3://db.sqlite";
+            description = "A storage backend connection string. See [storage docs](https://www.freie-netze.org/wg-access-server/3-storage/)";
+          };
+        };
+      };
       description = "See https://www.freie-netze.org/wg-access-server/2-configuration/ for possible options";
     };
 
@@ -28,7 +44,7 @@ in
         This must to contain the admin password and wireguard private key.
         As well as the secrets for your auth backend.
 
-        ## Example:
+        Example:
         ```yaml
         adminPassword: <admin password>
         wireguard:
@@ -60,11 +76,6 @@ in
           [ "auth" "gitlab" "clientSecret" ]
         ];
 
-    services.wg-access-server.settings = {
-      storage = lib.mkDefault "sqlite3://db.sqlite";
-      dns.enabled = lib.mkDefault true;
-    };
-
     boot.kernel.sysctl = {
       "net.ipv4.conf.all.forwarding" = "1";
       "net.ipv6.conf.all.forwarding" = "1";
@@ -76,11 +87,6 @@ in
       requires = [ "network-online.target" ];
       after = [ "network-online.target" ];
       script = ''
-        # wg-access-server expects the frontend to be in in the cwd
-        mkdir -p $STATE_DIRECTORY/website
-        rm -f $STATE_DIRECTORY/website/build
-        ln -s ${cfg.package}/site/ $STATE_DIRECTORY/website/build
-
         # merge secrets into main config
         yq eval-all "select(fileIndex == 0) * select(fileIndex == 1)" ${configFile} $CREDENTIALS_DIRECTORY/SECRETS_FILE \
           > "$STATE_DIRECTORY/config.yml"
