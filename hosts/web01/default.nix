@@ -4,6 +4,11 @@
     ./disko.nix
     inputs.disko.nixosModules.disko
     ../../profiles/entropia-cluster-vm
+    inputs.self.nixosModules.mediawiki
+  ];
+
+  disabledModules = [
+    "services/web-apps/mediawiki.nix"
   ];
 
   networking.hostName = "web01";
