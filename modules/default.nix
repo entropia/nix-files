@@ -7,7 +7,9 @@
         genAttrs
         filterAttrs
         attrNames
-        attrValues;
+        attrValues
+        pathIsRegularFile
+      ;
 
       isDir = _name: type: type == "directory";
 
@@ -23,9 +25,11 @@
       };
 
       modules = genAttrs moduleFolders buildModule;
+
+      defaultModules = filterAttrs (name: _: ! pathIsRegularFile (./. + "/${name}/non-default")) modules;
     in
     {
-      default.imports = attrValues modules;
+      default.imports = attrValues defaultModules;
     } // modules;
 }
 
