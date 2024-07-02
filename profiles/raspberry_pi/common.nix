@@ -10,11 +10,7 @@
       zfs = lib.mkForce false;
     };
 
-    hardware.opengl = {
-      enable = true;
-      setLdLibraryPath = true;
-      package = pkgs.mesa_drivers;
-    };
+    hardware.graphics.enable = true;
 
     environment.systemPackages = with pkgs; [
       libraspberrypi
