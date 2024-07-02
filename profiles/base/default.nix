@@ -22,6 +22,11 @@
 
     security.sudo.wheelNeedsPassword = false;
 
+    nix.gc = {
+      automatic = true;  
+      options = "--delete-older-than 2d";
+    };
+
     nix.settings = {
       trusted-users = [ "@wheel" ];
       trusted-substituters = [ "https://entropia.cachix.org" ];
