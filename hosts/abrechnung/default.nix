@@ -28,8 +28,8 @@
       "2a0e:c5c0:0:201::15/64"
     ];
     routes = [
-      { routeConfig = { Destination = "0.0.0.0/0"; Gateway = "45.140.180.33"; }; }
-      { routeConfig = { Destination = "::/0"; Gateway = "2a0e:c5c0:0:201::1"; }; }
+      { Destination = "0.0.0.0/0"; Gateway = "45.140.180.33"; }
+      { Destination = "::/0"; Gateway = "2a0e:c5c0:0:201::1"; }
     ];
   };
   services.resolved.enable = true;
