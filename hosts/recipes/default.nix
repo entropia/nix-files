@@ -10,6 +10,7 @@
   networking.hostName = "recipes";
   networking.domain = "entropia.de";
   deployment.targetHost = config.networking.fqdn;
+  deployment.tags = ["server"];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

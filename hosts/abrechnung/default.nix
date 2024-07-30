@@ -12,6 +12,7 @@
   networking.hostName = "abrechnung";
   networking.domain = "entropia.de";
   deployment.targetHost = "abrechnung.entropia.de";
+  deployment.tags = ["server"];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

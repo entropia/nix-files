@@ -15,6 +15,7 @@
     networking.hostName = "hass-display";
 
     deployment.targetHost = "10.214.227.29";
+    deployment.tags = [ "club" ];
 
     system.stateVersion = "23.05";
 

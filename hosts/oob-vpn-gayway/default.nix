@@ -10,6 +10,7 @@
     networking.hostName = "oob-vpn-gayway";
 
     deployment.targetHost = "192.168.72.20";
+    deployment.tags = [ "club" ];
 
     system.stateVersion = "23.05";
 

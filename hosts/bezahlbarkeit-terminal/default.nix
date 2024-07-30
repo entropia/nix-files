@@ -14,6 +14,7 @@
     networking.hostName = "bezahlbarkeit-terminal";
 
     deployment.targetHost = "10.214.227.138";
+    deployment.tags = [ "club" ];
 
     system.stateVersion = "23.05";
 
