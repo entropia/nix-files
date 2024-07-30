@@ -2,16 +2,16 @@
 
 rustPlatform.buildRustPackage {
   pname = "berechenbarkeit";
-  version = "0-unstable-2024-06-14";
+  version = "0-unstable-2024-07-06";
 
   src = fetchFromGitHub {
     owner = "entropia";
     repo = "berechenbarkeit";
-    rev = "73768f7690f0c91daed1560e3f8734d66218fba8";
-    hash = "sha256-mDx1sEEFoL90TUyIlpbIL+3WBaIggOrIQl+++YZQ7yI=";
+    rev = "694e70457d68959dbd7329aa8031e327805eff44";
+    hash = "sha256-nIiFf30Dpo9aZ01j93bzZ0ONeh202ZqWTYrTfZyJ0LA=";
   };
 
-  cargoHash = "sha256-ErfSeACBCw7t42joTljGxk201UrGxF6YO6Hpvj2vS0o=";
+  cargoHash = "sha256-6xFb09rVVZNVgHhbTM5mfFKm6aiOdLCLr2bBKSx1t58=";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [
