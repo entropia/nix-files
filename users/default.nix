@@ -20,7 +20,6 @@ in
       "jcgruenhage"  
       "promasu"
       "stored"
-      "transcaffeine"
       "twi"
       "xanderio"
     ];
