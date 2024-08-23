@@ -2,7 +2,6 @@ keys:
   - &admin_xanderio_age age1e9yparaev0gxwmherrjpxmfzgqga5eqdw53lrnv05s3ppjgzyceqftnwpx
   - &admin_evlli_pgp 56B96D1C10D68F49E31BB8A18092413A3F6DD75F
   - &admin_jcgruenhage_pgp 09E8418B46B53B0F825DE4BE018ACF465280F466
-  - &admin_transcaffeine_pgp 5E0A9CB3980657CB9AB94AE6790EAEC8F99AB41F
   - &admin_leona_pgp EB5CEED62922C6050F9FC85BD5B08ADFC75E3605
   - &host_oob_gayway_age age14ud0wf5nt2y4vh2kddasnqtdyrhl5xcrmh8py60tw9z5cw8xy9wqqyxsp6
   - &host_abrechnung_age age1tcvenngz4qfgyqpxcrf9xgdygs730h83d4ln6xz99slhnaeek5fsh9xgrx
@@ -17,7 +16,6 @@ creation_rules:
         pgp:
           - *admin_evlli_pgp
           - *admin_jcgruenhage_pgp
-          - *admin_transcaffeine_pgp
 
   - path_regex: secrets/profiles/entropia-cluster-vm.yaml
     key_groups:
@@ -28,7 +26,6 @@ creation_rules:
         pgp:
           - *admin_evlli_pgp
           - *admin_jcgruenhage_pgp
-          - *admin_transcaffeine_pgp
           - *admin_leona_pgp
 
   
@@ -40,7 +37,6 @@ creation_rules:
         pgp:
           - *admin_evlli_pgp
           - *admin_jcgruenhage_pgp
-          - *admin_transcaffeine_pgp
           - *admin_leona_pgp
 
   - path_regex: secrets/hosts/recipes.yaml
@@ -50,7 +46,6 @@ creation_rules:
           - *host_recipes_age
         pgp:
           - *admin_jcgruenhage_pgp
-          - *admin_transcaffeine_pgp
 
   - path_regex: secrets/hosts/oob_gayway.yaml
     key_groups:
@@ -60,7 +55,6 @@ creation_rules:
         pgp:
           - *admin_evlli_pgp
           - *admin_jcgruenhage_pgp
-          - *admin_transcaffeine_pgp
 
   - path_regex: secrets/services/wg-access-server.yaml
     key_groups:
@@ -70,7 +64,6 @@ creation_rules:
         pgp:
           - *admin_evlli_pgp
           - *admin_jcgruenhage_pgp
-          - *admin_transcaffeine_pgp
 
   - path_regex: secrets/services/tandoor.yaml
     key_groups:
@@ -79,4 +72,3 @@ creation_rules:
           - *host_recipes_age
         pgp:
           - *admin_jcgruenhage_pgp
-          - *admin_transcaffeine_pgp
