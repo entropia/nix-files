@@ -29,6 +29,8 @@
 
             # ffka hyper hyper visor
             "192.168.202.0/24"
+            # GH Infra
+            "192.168.62.0/24"
           ];
         };
         dns.enabled = false;
